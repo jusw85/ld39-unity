@@ -38,7 +38,11 @@ public class DudeController : MonoBehaviour {
     public AudioClip jumpSfx;
     public AudioClip crashSfx;
 
+    private PlayerActions input;
+
     private void Awake() {
+        input = PlayerActions.CreateWithDefaultBindings();
+
         raycaster = GetComponent<Raycaster>();
         audioManager = FindObjectOfType<AudioManager>();
         dudeAnimation = GetComponentInChildren<DudeAnimation>();
@@ -62,10 +66,12 @@ public class DudeController : MonoBehaviour {
         } else {
             moveX = 0f;
         }
-        moveInput = new Vector2(moveX, Input.GetAxisRaw("Vertical"));
+        //moveInput = new Vector2(moveX, Input.GetAxisRaw("Vertical"));
+        moveInput = new Vector2(moveX, 0f);
 
         if (!isGettingHit) {
-            if ((Input.GetButtonDown("Jump") || moveInput.y > 0)) {
+            if (input.Jump.IsPressed || moveInput.y > 0) {
+                //if ((Input.GetButtonDown("Jump") || moveInput.y > 0)) {
                 //if (Input.GetKeyDown(KeyCode.Space)) {
                 jumpPressedTime = Time.time;
             }
