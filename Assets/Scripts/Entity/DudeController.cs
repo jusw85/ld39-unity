@@ -70,7 +70,7 @@ public class DudeController : MonoBehaviour {
         moveInput = new Vector2(moveX, 0f);
 
         if (!isGettingHit) {
-            if (input.Jump.IsPressed || moveInput.y > 0) {
+            if (input.Jump.WasPressed || moveInput.y > 0) {
                 //if ((Input.GetButtonDown("Jump") || moveInput.y > 0)) {
                 //if (Input.GetKeyDown(KeyCode.Space)) {
                 jumpPressedTime = Time.time;
