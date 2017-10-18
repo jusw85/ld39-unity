@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 12
   productGUID: b9c7ec1f4d934234d85985c7c7cd0a79
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 2
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -141,7 +141,7 @@ PlayerSettings:
   targetPixelDensity: 0
   resolutionScalingMode: 0
   applicationIdentifier:
-    Android: com.Company.ProductName
+    Android: com.nervouscomposers.poweroflove
     Standalone: unity.DefaultCompany.2dtest
     Tizen: com.Company.ProductName
     iOS: com.Company.ProductName

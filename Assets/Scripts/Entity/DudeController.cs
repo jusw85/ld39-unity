@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using InControl;
 
 [RequireComponent(typeof(Raycaster))]
 public class DudeController : MonoBehaviour {
@@ -58,6 +59,15 @@ public class DudeController : MonoBehaviour {
         //cameraFollow.target = gameObject;
     }
 
+    private bool TouchBegan() {
+        foreach (InControl.Touch touch in TouchManager.Touches) {
+            if (touch.phase == TouchPhase.Began) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void Update() {
         //moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         float moveX;
@@ -70,13 +80,13 @@ public class DudeController : MonoBehaviour {
         moveInput = new Vector2(moveX, 0f);
 
         if (!isGettingHit) {
-            if (input.Jump.WasPressed || moveInput.y > 0) {
+            if (input.Jump.WasPressed || moveInput.y > 0 || TouchBegan()) { // check multi touch
                 //if ((Input.GetButtonDown("Jump") || moveInput.y > 0)) {
                 //if (Input.GetKeyDown(KeyCode.Space)) {
                 jumpPressedTime = Time.time;
             }
             if ((Time.time - jumpPressedTime) <= jumpPressedTimeTolerance) {
-                if (isGrounded || (Time.time - notGroundedJumpTime) <= notGroundedJumpTimeTolerance) {
+                if (!isJumping && (isGrounded || (Time.time - notGroundedJumpTime) <= notGroundedJumpTimeTolerance)) {
                     Jump();
                 }
             }
